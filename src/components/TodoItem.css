@@ -1,0 +1,37 @@
+.TodoItem > p {
+  font-size: 24px;
+  color: rgba(51, 51, 51, 0.8);
+  margin: 0;
+  flex: 1;
+}
+
+.TodoItem {
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.TodoItem > img {
+  width: 30px;
+  margin-right: 20px;
+}
+
+.TodoItem span {
+  color: rgba(51, 51, 51, 0);
+  font-size: 26px;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.TodoItem:hover span {
+  color: rgba(51, 51, 51, 0.8);
+}
+
+.TodoItem:not(:last-child) {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+}
+
+.TodoItem-complete > p{
+  opacity: .3;
+  text-decoration: line-through;
+}
