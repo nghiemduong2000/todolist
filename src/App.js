@@ -11,7 +11,7 @@ class App extends React.Component {
     this.state = {
       newItem: '',
       todoItems: [],
-      flag: true,
+      flagSelectAll: true,
       currentFilter: 'All',
       filter: [
         { value: 'All', isSelected: true },
@@ -70,17 +70,17 @@ class App extends React.Component {
   }
 
   selectAll() {
-    const { todoItems, flag } = this.state;
-    if (flag) {
-      this.setState({
-        todoItems: todoItems.map((item) => ({ ...item, isComplete: true })),
-        flag: false,
-      });
+    const { flagSelectAll } = this.state;
+    if (flagSelectAll) {
+      this.setState((prevState) => ({
+        todoItems: prevState.todoItems.map((item) => ({ ...item, isComplete: true })),
+        flagSelectAll: false,
+      }));
     } else {
-      this.setState({
-        todoItems: todoItems.map((item) => ({ ...item, isComplete: false })),
-        flag: true,
-      });
+      this.setState((prevState) => ({
+        todoItems: prevState.todoItems.map((item) => ({ ...item, isComplete: false })),
+        flagSelectAll: true,
+      }));
     }
   }
 
