@@ -109,9 +109,7 @@ class App extends React.Component {
     return () => {
       const { todoItems } = this.state;
       this.setState({
-        todoItems: todoItems.filter((ele) => {
-          return item !== ele;
-        }),
+        todoItems: todoItems.filter((ele) => item !== ele),
       });
     };
   }
@@ -137,7 +135,14 @@ class App extends React.Component {
           <input value={newItem} type="text" placeholder="Add a new item" onKeyUp={this.onEnter} onChange={this.onChange} />
         </div>
         {
-          shownTodos.map((item, index) => <TodoItem onClick={this.onItemClicked(item)} key={index} item={item} destroy={this.destroy(item)} />)
+          shownTodos.map((item, index) => (
+            <TodoItem
+              onClick={this.onItemClicked(item)}
+              key={index}
+              item={item}
+              destroy={this.destroy(item)}
+            />
+          ))
         }
         <div className="Footer">
           <p>
@@ -146,7 +151,15 @@ class App extends React.Component {
           </p>
           <div className="filter">
             {
-              filter.map((ele) => <button className={classNames('filter_btn', { 'filter_btn--selected': ele.isSelected })} onClick={this.filter(ele)}>{ele.value}</button>)
+              filter.map((ele, index) => (
+                <button
+                  key={index}
+                  className={classNames('filter_btn', { 'filter_btn--selected': ele.isSelected })}
+                  onClick={this.filter(ele)}
+                >
+                  {ele.value}
+                </button>
+              ))
             }
           </div>
         </div>
