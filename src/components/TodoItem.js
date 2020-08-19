@@ -26,6 +26,7 @@ class TodoItem extends Component {
 TodoItem.propTypes = {
   item: PropTypes.shape({
     title: PropTypes.string,
+    isComplete: PropTypes.bool,
   }),
   onClick: PropTypes.func,
   destroy: PropTypes.func,

@@ -1,22 +1,22 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
-import './App.css';
-import classNames from 'classnames';
-import TodoItem from './components/TodoItem';
-import checkAll from './imgs/all.svg';
+import React from "react";
+import "./App.css";
+import classNames from "classnames";
+import TodoItem from "./components/TodoItem";
+import checkAll from "./imgs/all.svg";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      newItem: '',
+      newItem: "",
       todoItems: [],
       flagSelectAll: true,
-      currentFilter: 'All',
+      currentFilter: "All",
       filter: [
-        { value: 'All', isSelected: true },
-        { value: 'Active', isSelected: false },
-        { value: 'Complete', isSelected: false },
+        { value: "All", isSelected: true },
+        { value: "Active", isSelected: false },
+        { value: "Complete", isSelected: false },
       ],
     };
     this.onChange = this.onChange.bind(this);
@@ -52,13 +52,12 @@ class App extends React.Component {
       }
 
       text = text.trim();
-      if (!text) { return; }
+      if (!text) {
+        return;
+      }
       this.setState({
-        newItem: '',
-        todoItems: [
-          { title: text, isComplete: false },
-          ...todoItems,
-        ],
+        newItem: "",
+        todoItems: [{ title: text, isComplete: false }, ...todoItems],
       });
     }
   }
@@ -73,12 +72,18 @@ class App extends React.Component {
     const { flagSelectAll } = this.state;
     if (flagSelectAll) {
       this.setState((prevState) => ({
-        todoItems: prevState.todoItems.map((item) => ({ ...item, isComplete: true })),
+        todoItems: prevState.todoItems.map((item) => ({
+          ...item,
+          isComplete: true,
+        })),
         flagSelectAll: false,
       }));
     } else {
       this.setState((prevState) => ({
-        todoItems: prevState.todoItems.map((item) => ({ ...item, isComplete: false })),
+        todoItems: prevState.todoItems.map((item) => ({
+          ...item,
+          isComplete: false,
+        })),
         flagSelectAll: true,
       }));
     }
@@ -115,14 +120,12 @@ class App extends React.Component {
   }
 
   render() {
-    const {
-      todoItems, newItem, filter, currentFilter,
-    } = this.state;
+    const { todoItems, newItem, filter, currentFilter } = this.state;
     const shownTodos = todoItems.filter((ele) => {
       switch (currentFilter) {
-        case 'Active':
+        case "Active":
           return !ele.isComplete;
-        case 'Complete':
+        case "Complete":
           return ele.isComplete;
         default:
           return true;
@@ -132,35 +135,39 @@ class App extends React.Component {
       <div className="App">
         <div className="Header">
           <img onClick={this.selectAll} src={checkAll} alt="" />
-          <input value={newItem} type="text" placeholder="Add a new item" onKeyUp={this.onEnter} onChange={this.onChange} />
+          <input
+            value={newItem}
+            type="text"
+            placeholder="Add a new item"
+            onKeyUp={this.onEnter}
+            onChange={this.onChange}
+          />
         </div>
-        {
-          shownTodos.map((item, index) => (
-            <TodoItem
-              onClick={this.onItemClicked(item)}
-              key={index}
-              item={item}
-              destroy={this.destroy(item)}
-            />
-          ))
-        }
+        {shownTodos.map((item, index) => (
+          <TodoItem
+            onClick={this.onItemClicked(item)}
+            key={index}
+            item={item}
+            destroy={this.destroy(item)}
+          />
+        ))}
         <div className="Footer">
           <p>
             {todoItems.length}
             <span> items left</span>
           </p>
           <div className="filter">
-            {
-              filter.map((ele, index) => (
-                <button
-                  key={index}
-                  className={classNames('filter_btn', { 'filter_btn--selected': ele.isSelected })}
-                  onClick={this.filter(ele)}
-                >
-                  {ele.value}
-                </button>
-              ))
-            }
+            {filter.map((ele, index) => (
+              <button
+                key={index}
+                className={classNames("filter_btn", {
+                  "filter_btn--selected": ele.isSelected,
+                })}
+                onClick={this.filter(ele)}
+              >
+                {ele.value}
+              </button>
+            ))}
           </div>
         </div>
       </div>
